@@ -14,21 +14,35 @@ classdef NeuralNet
     end
     
     methods
-        function obj = NN(layers,layerDimensions)
+        function obj = NeuralNet(layers,layerDimensions)
             %UNTITLED2 Construct an instance of this class
             %   Detailed explanation goes here
-            obj.weights = cell(layers)
-            for i=1:length(obj.weights):
+            obj.weights = cell(layers);
+            for i=1:length(obj.weights)
                 obj.weights{i} = cell(layerDimensions(i));
+                %need to build d3
+            end
+            
+            obj.biases = cell(layers);
+            for i=1:length(obj.biases)
+                obj.biases{i} = cell(layerDimensions(i));
             end
             
         end
         
-        function outputArg = method1(obj,inputArg)
-            %METHOD1 Summary of this method goes here
-            %   Detailed explanation goes here
-            outputArg = obj.Property1 + inputArg;
-        end
+%         function outputArg = method1(obj,inputArg)
+%             %METHOD1 Summary of this method goes here
+%             %   Detailed explanation goes here
+%             outputArg = obj.Property1 + inputArg;
+%         end
+
+        layer_2_delta = layer_2_error * sigmoid_output_to_derivative(layer_2)
+
+        layer_1_error = layer_2_delta.dot(weights2.T)
+
+        layer_1_delta = layer_1_error * sigmoid_output_to_derivative(layer_1)
+
     end
 end
 
+        
